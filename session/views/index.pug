@@ -1,0 +1,7 @@
+html
+  body
+    if currentUser
+      span= currentUser
+      a(href='/logout') 退出
+    else
+      a(href='/login') 登录
