@@ -21,3 +21,17 @@ exports.list = function(req, res) {
     }) 
   })
 }
+
+exports.del = function(req, res) {
+  let id = req.query.id
+  if(id) {
+    Category.remove({_id: id}, function(err, category) {
+      if(err) return res.status(403).json({err, msg: '删除分类失败'})
+      res.json({
+        msg: '删除分类成功'
+      })
+    })
+  } else {
+    res.status(403).json({msg: '请求失败'})
+  } 
+}
