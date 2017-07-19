@@ -1,7 +1,7 @@
 import React from 'react'
 import { browserHistory } from 'react-router'
-import axios from 'axios'
-import config from '../config'
+import { signin } from '../redux/actions/accountActions'
+import { connect } from 'react-redux'
 
 class SignIn extends React.Component {
   handleSubmit(e) {
@@ -10,12 +10,8 @@ class SignIn extends React.Component {
       username: this.refs.username.value,
       password: this.refs.password.value
     }
-    axios.post(`${config.host}/user/signin`, _user)
-      .then(res => {
-        console.log(res)
-        browserHistory.push('/')
-      })
-      .catch(err => console.log(err))
+    this.props.signin(_user)
+    browserHistory.push('/')
   }
   render() {
     return (
@@ -39,4 +35,6 @@ class SignIn extends React.Component {
   }
 }
 
-export default SignIn
+const mapStateToProps = () => ({})
+
+export default connect(mapStateToProps, { signin })(SignIn)
