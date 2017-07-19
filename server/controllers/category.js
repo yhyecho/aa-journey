@@ -11,3 +11,13 @@ exports.add = function(req, res) {
     })
   })
 }
+
+exports.list = function(req, res) {
+  Category.find({}, 'name', function(err, cats) {
+    if(err) return res.status(403).json({err, msg: '获取分类列表失败'})
+    res.json({
+      msg: '获取分类列表成功',
+      cats
+    }) 
+  })
+}
