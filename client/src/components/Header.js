@@ -7,6 +7,9 @@ class Header extends React.Component {
       <div>
         <Link to='/'>Home</Link>
         <Link to='/new-cat'>新建分类</Link>
+        <Link to='/new-course'>新建课程</Link>
+        <Link to='/signin'>登录</Link>
+        <Link to='/signup'>注册</Link>
       </div>
     )
   }
