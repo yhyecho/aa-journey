@@ -1,2 +1,5 @@
+# exclude folder
 node_modules/
 data/
+# exclude bundle.js
+bundle.js
