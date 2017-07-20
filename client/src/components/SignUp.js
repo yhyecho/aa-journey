@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import config from '../config'
 import { browserHistory } from 'react-router'
+import '../css/signup.css'
 
 class SignUp extends React.Component {
   handleSubmit(e) {
@@ -19,7 +20,7 @@ class SignUp extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="signup">
         <form onSubmit={this.handleSubmit.bind(this)}>
           <p>
             <label>用户名</label>
@@ -34,7 +35,7 @@ class SignUp extends React.Component {
             <input ref="password"  type="password"/>
           </p>
           <p>
-            <input type="submit" value="注册"/>
+            <input className="submit button" type="submit" value="注册"/>
           </p>
         </form>
       </div>

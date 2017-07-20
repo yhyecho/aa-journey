@@ -2,6 +2,7 @@ import React from 'react'
 import { browserHistory } from 'react-router'
 import { signin } from '../redux/actions/accountActions'
 import { connect } from 'react-redux'
+import '../css/signin.css'
 
 class SignIn extends React.Component {
   handleSubmit(e) {
@@ -15,7 +16,7 @@ class SignIn extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className='signin'>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <p>
             <label>用户名</label>
@@ -27,7 +28,7 @@ class SignIn extends React.Component {
           </p>
           <p>
             <label></label>
-            <input type="submit" value="登录"/>
+            <input className="submit button" type="submit" value="登录"/>
           </p>
         </form>
       </div>

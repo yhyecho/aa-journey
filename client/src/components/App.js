@@ -9,10 +9,8 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <div className='app'>
-          <h1>App</h1>
           <Header />
             { this.props.children }
-          <h1>Footer</h1>
         </div>
       </Provider>
     )
