@@ -4,6 +4,14 @@ function accountReducer(state = [], action) {
       return {
         currentUser: action.username
       }
+    case 'LOAD_USER':
+      return {
+        currentUser: action.username
+      }
+    case 'LOG_OUT':
+      return {
+        currentUser: ''
+      }   
     default:
       return state  
   }

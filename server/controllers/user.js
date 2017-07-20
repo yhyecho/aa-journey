@@ -48,3 +48,15 @@ exports.signin = function(req, res) {
 exports.logout = function(req, res) {
   res.json({msg: '登出成功'})
 }
+
+exports.getUserById = function(req, res) {
+  User.findOne({_id: req.params.userId}, function(err, user) {
+    if(err) return res.status(500).json({err, msg: '查询用户失败'})
+    if(user) {
+      return res.json({
+        msg: '读取用户成功',
+        user
+      })
+    }  
+  })
+}
