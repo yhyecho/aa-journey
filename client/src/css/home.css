@@ -30,6 +30,7 @@
 }
 
 .course .buy {
+  display: block;
   width: 90px;
   margin: 0 auto;
   text-align: center;
@@ -42,4 +43,13 @@
   background-color: #fff;
   font-size: 1.4em;
   color: #00bcd4;
+}
+
+.course .buy:focus {
+  outline: none;
+}
+
+.course .buy.disabled {
+  color: gray;
+  cursor: auto;
 }

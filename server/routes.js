@@ -1,6 +1,7 @@
 let Category = require('./controllers/category')
 let Course = require('./controllers/course')
 let User = require('./controllers/user')
+let Order = require('./controllers/order')
 
 module.exports = function(app) {
   // curl test
@@ -21,4 +22,8 @@ module.exports = function(app) {
   app.post('/user/signin', User.signin)
   app.get('/user/logout', User.logout)
   app.get('/user/:userId', User.getUserById)
+
+  // order
+  app.get('/orders', Order.list)
+  app.post('/order/new', Order.add)
 }
