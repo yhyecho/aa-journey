@@ -12,20 +12,20 @@ class Header extends React.Component {
   render() {
     const LogoutLink = (
       <div>
-        <Link to='/profile'>{this.props.currentUser}</Link>
-        <Link to='/' onClick={this.props.logout}>退出</Link>
+        <Link to="/profile">{this.props.currentUser}</Link>
+        <Link to="/" onClick={this.props.logout}>退出</Link>
       </div>
     )
 
     const LogginLink = (
       <div>
-        <Link to='/signup'>注册</Link>
-        <Link to='/signin'>登录</Link>
+        <Link to="/signup">注册</Link>
+        <Link to="/signin">登录</Link>
       </div>
     )
     return (
-      <div className='header'>
-        <div className='container'>
+      <div className="header">
+        <div className="container">
           <Link to='/'>首页</Link>
           {this.props.currentUser.length != 0 ? LogoutLink : LogginLink}
         </div>

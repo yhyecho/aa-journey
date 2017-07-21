@@ -2,68 +2,49 @@ import React from 'react'
 import Header from './Header'
 import axios from 'axios'
 import config from '../config'
-import { fetchCats } from '../redux/actions/catActions'
+import { fetchCats, createCat, removeCat } from '../redux/actions/catActions'
 import { connect } from 'react-redux'
+import '../css/new-cat.css'
 
 
 class NewCat extends React.Component {
-  // constructor() {
-  //   super()
-  //   this.state = {
-  //     cats: []
-  //   }
-  // }
+  constructor(props) {
+    super(props)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
   componentWillMount() {
-    // axios.get(`${config.host}/categorys`).then(res => {
-    //   this.setState({
-    //     cats: res.data.cats
-    //   })
-    // })
     this.props.fetchCats()
   }
-  _updateCatList() {
-    axios.get(`${config.host}/categorys`)
-      .then((res) => this.setState({cats: res.data.cats}))
-      .catch(err => console.log(err))
-  }
-  _handleSubmit(e) {
+  handleSubmit(e) {
     e.preventDefault()
     let catName = this.refs.catName.value
+    this.props.createCat(catName)
     this.refs.catName.value = ''
-    let data = {name: catName}
-    axios.post(`${config.host}/category`, data)
-      .then((res) => {
-        this._updateCatList()
-      })
   }
-  _handleDelete(id) {
-    let cats = this.state.cats
-    cats = cats.filter(item => item._id != id)
-    this.setState({cats})
-    axios.delete(`${config.host}/category?id=${id}`)
-      .then(res => {
-        console.log(res)
-      })
+  handleDelete(id) {
+    this.props.removeCat(id)
   }  
   render() {
-    // let catList = this.state.cats.map((item, i) => {
     let catList = this.props.cats.map((item, i) => {
       return (  
         <li key={i}>
-          {item.name} -- {item._id}
-          <span onClick={this._handleDelete.bind(this, item._id)}> 删除 </span>
+          {item.name}
+          <span onClick={() => this.handleDelete(item._id)}>x</span>
         </li>  
       )
     })
     return (
-      <div>
-        <ul>
-          {catList.length != 0 ? catList : '暂无分类'}
-        </ul>
-        <form onSubmit={this._handleSubmit.bind(this)}>
-          <input ref='catName' type='text' />
-          <input type='submit' />
-        </form>
+      <div className="new-cat">
+        <h1 className="title-dark-bg">新建分类</h1>
+        <div className="container">
+          <ul className="cat-list">
+            {catList.length != 0 ? catList : '暂无分类'}
+          </ul>
+          <form onSubmit={this.handleSubmit}>
+            <input ref="catName" type="text" />
+            <input className="submit" type="submit" value="创建" />
+          </form>
+        </div>
       </div>
     )
   }
@@ -73,4 +54,4 @@ const mapStateToProps = (state) => ({
   cats: state.cats
 })
 
-export default connect(mapStateToProps, {fetchCats})(NewCat)
+export default connect(mapStateToProps, {fetchCats, createCat, removeCat})(NewCat)

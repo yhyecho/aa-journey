@@ -3,13 +3,14 @@ import axios from 'axios'
 import config from '../config'
 
 class Course extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       cats: []
     }
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
-  _getCategorys() {
+  getCategorys() {
     axios.get(`${config.host}/categorys`)
       .then((res) => {
         this.setState({cats: res.data.cats})
@@ -17,9 +18,9 @@ class Course extends React.Component {
       .catch(err => console.log(err))
   }
   componentWillMount() {
-    this._getCategorys()
+    this.getCategorys()
   }
-  _handleSubmit(e) {
+  handleSubmit(e) {
     e.preventDefault()
     let course = {
       name: this.refs.name.value,
@@ -28,7 +29,6 @@ class Course extends React.Component {
       poster: this.refs.poster.value,
       categoryId: this.refs.categoryId.value
     }
-    console.log(course)
     axios.post(`${config.host}/course/new`, course)
       .then(res => console.log(res))
       .catch(err => console.log(err))
@@ -44,22 +44,22 @@ class Course extends React.Component {
     return (
       <div className="course">
         <span>新建课程</span>
-        <form onSubmit={this._handleSubmit.bind(this)}>
+        <form onSubmit={this.handleSubmit}>
           <p>
             <label>name</label>
-            <input ref='name' type="text"/>
+            <input ref="name" type="text"/>
           </p>
           <p>
             <label>summary</label>
-            <input ref='summary' type="text"/>
+            <input ref="summary" type="text"/>
           </p>
           <p>
             <label>price</label>
-            <input ref='price' type="text"/>
+            <input ref="price" type="text"/>
           </p>
           <p>
             <label>poster</label>
-            <input ref='poster' type="text"/>
+            <input ref="poster" type="text"/>
           </p>
           <p>
             <select name="categoryId" ref="categoryId">
